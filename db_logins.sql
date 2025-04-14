@@ -1,7 +1,9 @@
-CREATE DATABASE db_logins;
-USE db_logins;
+CREATE DATABASE db_for_test_app;
+USE db_for_test_app;
 
-CREATE TABLE [Clients]
+
+
+CREATE TABLE [Users]
 (
     [ID] INT IDENTITY,
 	[Time_log] VARCHAR(50),
@@ -11,5 +13,5 @@ CREATE TABLE [Clients]
 
 
 
-SELECT * FROM [Clients]
-DROP TABLE [Clients]
+SELECT * FROM [Users]
+DROP TABLE [Users]
