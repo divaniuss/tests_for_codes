@@ -32,8 +32,10 @@ def exit_app():
     client.close()
 
 
-tk.Button(root, text="Регистрация", command= lambda : register(root, client)).pack(pady=5)
-tk.Button(root, text="Логин", command=lambda : login(root, client)).pack(pady=5)
-tk.Button(root, text="Выход", command=exit_app).pack(pady=5)
+button_width = 30
+button_pad_y = 10
+tk.Button(root, text="Регистрация", width=button_width, command=lambda : register(root, client)).pack(pady=button_pad_y)
+tk.Button(root, text="Логин",  width=button_width, command=lambda : login(root, client)).pack(pady=button_pad_y)
+tk.Button(root, text="Выход",  width=button_width, command=exit_app).pack(pady=(button_pad_y, 20))
 
 root.mainloop()
