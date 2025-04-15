@@ -8,7 +8,7 @@ from server_actions.login_Serv import handle_login
 from server_actions.registr_Serv import handle_register
 
 server_base = r'localhost\SQLEXPRESS'
-database = 'db_for_test_app'
+database = 'db_logins'
 dsn = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server_base};DATABASE={database};Trusted_Connection=yes'
 
 IP = '127.0.0.1'
