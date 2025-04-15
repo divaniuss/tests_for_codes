@@ -3,6 +3,7 @@ import hashlib
 import tkinter as tk
 from tkinter import messagebox
 
+from pages.InAccount.main_acc import InAccount
 from utilities.center_window import center_window
 
 def login(root, client):
@@ -19,7 +20,7 @@ def login(root, client):
     password_entry.pack()
 
     def send_login():
-        login = login_entry.get().strip()
+        login_name = login_entry.get().strip()
         password = password_entry.get()
 
         if not login or not password:
@@ -27,12 +28,16 @@ def login(root, client):
             return
 
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
-        json_output = json.dumps({"data": {"name": login,
+        json_output = json.dumps({"data": {"login_name": login_name,
                                            "password": hashed_password},
                                   "action": "LOGIN"})
         client.send(json_output.encode())
-        response = client.recv(1024).decode()
-        messagebox.showinfo("Ответ сервера", response)
+        response = json.loads(client.recv(1024).decode())
+        name = response["name"]
+
+        if response["action"] == "IN":
+            InAccount(name, root, login_name, client)
+
         login_window.destroy()
 
     tk.Button(login_window, text="Войти", command=send_login).pack()

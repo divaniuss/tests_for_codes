@@ -3,14 +3,16 @@ import pyodbc
 
 def handle_register(request, dsn, conn):
     print("Регистрация:")
-    login = request["data"]["name"]
+    login_name = request["data"]["login_name"]
     password = request["data"]["password"]
+    name = request["data"]["name"]
     try:
         conn_db = pyodbc.connect(dsn)
         cursor = conn_db.cursor()
 
-        insert_query = "INSERT INTO [Users] ([login], [Password]) VALUES (?, ?)"
-        values = (login, password)
+        print("pihaem")
+        insert_query = "INSERT INTO [Users] ([Name], [login], [Password]) VALUES (?, ?, ?)"
+        values = (name, login_name, password)
         cursor.execute(insert_query, values)
         cursor.commit()
         conn_db.commit()
