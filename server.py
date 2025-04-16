@@ -6,6 +6,7 @@ from datetime import datetime
 from server_actions.admin_Serv import handle_admin
 from server_actions.login_Serv import handle_login
 from server_actions.registr_Serv import handle_register
+from server_actions.testing_Serv import testing_serv
 
 server_base = r'localhost\SQLEXPRESS'
 database = 'db_for_test_app'
@@ -38,6 +39,8 @@ while True:
         handle_admin(dsn, conn)
     elif action == "LOGIN":
         handle_login(request, now, dsn, conn)
+    elif action == "TESTING":
+        testing_serv(request, dsn, conn)
     elif action == "REGISTER":
         handle_register(request, dsn, conn)
     elif action == "BYE":
