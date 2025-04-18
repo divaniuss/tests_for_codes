@@ -4,6 +4,7 @@ import json
 from datetime import datetime
 
 from server_actions.admin_Serv import handle_admin
+from server_actions.admin_add_Serv import new_question_admin
 from server_actions.login_Serv import handle_login
 from server_actions.logs_Serv import logs_serv
 from server_actions.registr_Serv import handle_register
@@ -38,6 +39,8 @@ while True:
 
     if action == "ADMIN":
         handle_admin(dsn, conn)
+    elif action == "ADMINNEW":
+        new_question_admin(request, dsn, conn)
     elif action == "LOGIN":
         handle_login(request, now, dsn, conn)
     elif action == "TESTING":
