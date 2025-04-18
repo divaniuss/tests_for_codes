@@ -1,8 +1,6 @@
 CREATE DATABASE db_for_test_app;
 USE db_for_test_app;
 
-
-
 CREATE TABLE [Users]
 (
     [ID] INT IDENTITY,
@@ -28,10 +26,20 @@ CREATE TABLE [Answers] (
 );
 
 
+CREATE TABLE [Logs] (
+    [ID] INT IDENTITY PRIMARY KEY,
+    [User] VARCHAR(255) NOT NULL,
+    [Test] VARCHAR(255) NOT NULL,
+    [Answers] VARCHAR(50) NOT NULL,
+	[Time_log] VARCHAR(255),
+);
+
 SELECT * FROM [Answers]
 SELECT * FROM [Questions]
 SELECT * FROM [Users]
+SELECT * FROM [Logs]
 
+DROP TABLE [Logs]
 DROP TABLE [Answers]
 DROP TABLE [Questions]
 DROP TABLE [Users]

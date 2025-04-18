@@ -1,10 +1,12 @@
 import tkinter as tk
 import json
 from tkinter import messagebox
+
+from pages.InAccount.test_pages.logs import send_logs
 from utilities.center_window import center_window
 
 
-def Test(root, client, level):
+def Test(root, client, level, login_name):
     tests_in_window = tk.Toplevel(root)
     tests_in_window.title("Тестирование")
     center_window(tests_in_window, 400, 400)
@@ -100,26 +102,7 @@ def Test(root, client, level):
         messagebox.showinfo("Результаты", result_text)
         tests_in_window.destroy()
 
+        send_logs(login_name, level, correct_count, total, client)
+
+
     show_question(current_question_index[0])
-
-
-    # [{'question': 'Что означает код 100?', 'answers': [{'text': 'Продолжай', 'isCorrect': True},
-    #                                                   {'text': 'Успешный запрос', 'isCorrect': False},
-    #                                                    {'text': 'Ошибка клиента', 'isCorrect': False},
-    #                                                    {'text': 'Ресурс перемещён', 'isCorrect': False}]},
-
-    #  {'question': 'Что означает код 101?', 'answers': [{'text': 'Переключение протоколов', 'isCorrect': True},
-    #                                                    {'text': 'Неавторизованный доступ', 'isCorrect': False},
-    #                                                    {'text': 'Ресурс не найден', 'isCorrect': False},
-    #                                                    {'text': 'Ошибка сервера', 'isCorrect': False}]},
-
-    #  {'question': 'Что означает код 102?', 'answers': [{'text': 'Обработка продолжается', 'isCorrect': True},
-    #                                                    {'text': 'Ошибка базы данных', 'isCorrect': False},
-    #                                                    {'text': 'Доступ запрещён', 'isCorrect': False},
-    #                                                    {'text': 'Неверный метод', 'isCorrect': False}]},
-
-    #  {'question': 'Что означает код 103?', 'answers': [{'text': 'Ранняя подсказка', 'isCorrect': True},
-    #                                                   {'text': 'Файл повреждён', 'isCorrect': False},
-    #                                                   {'text': 'Редирект', 'isCorrect': False},
-    #                                                   {'text': 'Файл удалён', 'isCorrect': False}]}]
-

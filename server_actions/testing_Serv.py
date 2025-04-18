@@ -42,3 +42,4 @@ def testing_serv(request, dsn, conn):
 
     except Exception as e:
         print(f"Ошибка: {e}")
+        conn.send(f"Ошибка подключения: {e}".encode())

@@ -5,6 +5,7 @@ from datetime import datetime
 
 from server_actions.admin_Serv import handle_admin
 from server_actions.login_Serv import handle_login
+from server_actions.logs_Serv import logs_serv
 from server_actions.registr_Serv import handle_register
 from server_actions.testing_Serv import testing_serv
 
@@ -41,6 +42,8 @@ while True:
         handle_login(request, now, dsn, conn)
     elif action == "TESTING":
         testing_serv(request, dsn, conn)
+    elif action =="LOGS":
+        logs_serv(request, dsn, conn, now)
     elif action == "REGISTER":
         handle_register(request, dsn, conn)
     elif action == "BYE":

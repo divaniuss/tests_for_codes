@@ -20,5 +20,5 @@ def InAccount(name, root, login_name, client):
 
     button_width = 30
     button_pad_y = 10
-    tk.Button(login_in_window, text="Начать тест", width=button_width, command= lambda : Test(root, client, int(level_var.get()))).pack(pady=button_pad_y)
+    tk.Button(login_in_window, text="Начать тест", width=button_width, command= lambda : Test(root, client, int(level_var.get()), login_name)).pack(pady=button_pad_y)
     tk.Button(login_in_window, text="Выйти", width=button_width, command=Exit).pack(pady=(button_pad_y, 20))
