@@ -6,7 +6,7 @@ def handle_admin(dsn, conn):
         conn_db = pyodbc.connect(dsn)
         cursor = conn_db.cursor()
 
-        # Вывод информации о пользователях
+
         cursor.execute("SELECT [ID], [Time_log], [login] FROM [Users]")
         users = cursor.fetchall()
 
@@ -14,7 +14,7 @@ def handle_admin(dsn, conn):
         for row in users:
             users_str += f"ID: {row[0]} Был в сети: {row[1]} Логин: {row[2]}\n"
 
-        # Вывод логов
+
         cursor.execute("SELECT [ID], [User], [Test], [Answers], [Time_log] FROM [Logs]")
         logs = cursor.fetchall()
 

@@ -58,18 +58,15 @@ def new():
         level_of_test = test_entry.get().strip()
         question = question_entry.get().strip()
 
-        # Получаем текст каждого ответа по отдельности
         answer1 = answer_entries[0].get().strip()
         answer2 = answer_entries[1].get().strip()
         answer3 = answer_entries[2].get().strip()
         answer4 = answer_entries[3].get().strip()
 
-        # Проверка уровня
         if level_of_test not in ["100", "200", "300", "400", "500"]:
             messagebox.showerror("Ошибка", "Код теста должен быть одним из: 100, 200, 300, 400, 500.")
             return
 
-        # Проверка заполнения всех полей
         if question == "" or answer1 == "" or answer2 == "" or answer3 == "" or answer4 == "":
             messagebox.showerror("Ошибка", "Пожалуйста, заполните все поля.")
             return
@@ -98,7 +95,12 @@ def new():
         print(json_output)
         try:
             client.send(json_output.encode())
-            messagebox.showinfo("Успех", "Вопрос успешно добавлен.")
+            response = client.recv(1024).decode()
+            print(response)
+            if response == "YES":
+                messagebox.showinfo("Успех", "Вопрос успешно добавлен.")
+            else:
+                messagebox.showinfo("Error", response)
             add_window_admin.destroy()
         except Exception as e:
             messagebox.showerror("Ошибка", f"Не удалось отправить данные: {e}")
