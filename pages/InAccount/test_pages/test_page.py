@@ -18,21 +18,21 @@ def Test(root, client, level):
 
     current_question_index = [0]
     selected_answer = tk.IntVar()
+    user_answers = []
 
     def show_question(index):
         for widget in tests_in_window.winfo_children():
             widget.destroy()
 
         if index >= len(response):
-            messagebox.showinfo("Готово", "Вы прошли все вопросы!")
-            tests_in_window.destroy()
+            show_results()
             return
 
         question_data = response[index]
         question_text = question_data['question']
         answers = question_data['answers']
 
-        tk.Label(tests_in_window, text=question_text, wraplength=380).pack(pady=10)
+        tk.Label(tests_in_window, text=f"Вопрос {index + 1}: {question_text}", wraplength=380).pack(pady=10)
 
         selected_answer.set(-1)
 
@@ -45,12 +45,63 @@ def Test(root, client, level):
             ).pack(anchor="w")
 
         def next_question():
+            selected_index = selected_answer.get()
+            if selected_index == -1:
+                messagebox.showwarning("Внимание", "Пожалуйста, выберите ответ.")
+                return
+
+            selected_text = answers[selected_index]["text"]
+            is_correct = answers[selected_index]["isCorrect"]
+
+            correct_text = ""
+            for ans in answers:
+                if ans["isCorrect"]:
+                    correct_text = ans["text"]
+                    break
+
+            user_answers.append({
+                "question": question_text,
+                "selected": selected_text,
+                "correct": correct_text,
+                "is_correct": is_correct
+            })
+
             current_question_index[0] += 1
             show_question(current_question_index[0])
 
         tk.Button(tests_in_window, text="Далее", command=next_question).pack(pady=20)
 
+    def show_results():
+        correct_count = 0
+        total = len(user_answers)
+        result_lines = []
+
+        for i, answer in enumerate(user_answers, start=1):
+            question = answer["question"]
+            selected = answer["selected"]
+            correct = answer["correct"]
+            is_correct = answer["is_correct"]
+
+            if is_correct:
+                mark = "(Верно)"
+                correct_count += 1
+            else:
+                mark = "(Неверно)"
+
+            result_lines.append(f"{i}. {question}")
+            result_lines.append(f"   Ваш ответ: {selected} {mark}")
+            if not is_correct:
+                result_lines.append(f"   Правильный ответ: {correct}")
+            result_lines.append("")
+
+        result_summary = f"Вы ответили правильно на {correct_count} из {total} вопросов.\n\n"
+        result_text = result_summary + "\n".join(result_lines)
+
+        messagebox.showinfo("Результаты", result_text)
+        tests_in_window.destroy()
+
     show_question(current_question_index[0])
+
 
     # [{'question': 'Что означает код 100?', 'answers': [{'text': 'Продолжай', 'isCorrect': True},
     #                                                   {'text': 'Успешный запрос', 'isCorrect': False},
