@@ -3,7 +3,6 @@ import socket
 import tkinter as tk
 from tkinter import scrolledtext
 from tkinter import messagebox
-
 from utilities.center_window import center_window
 
 IP = '127.0.0.1'
@@ -21,10 +20,6 @@ text_response = scrolledtext.ScrolledText(root, wrap=tk.WORD, width=60, height=2
 text_response.pack(pady=10, padx=10)
 text_response.config(state=tk.DISABLED)
 
-import tkinter as tk
-from tkinter import messagebox
-from utilities.center_window import center_window
-import json
 
 
 def new():
